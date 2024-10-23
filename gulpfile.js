@@ -1,16 +1,30 @@
 "use strict"; // eslint-disable-line
 
 const gulp = require("gulp");
-const jsdoc2md = require("jsdoc-to-markdown");
 const fs = require("fs");
+const path = require("path");
+const jsdoc2md = require("jsdoc-to-markdown");
 
-gulp.task("docs", (done) => {
-    jsdoc2md.render({
-        template: fs.readFileSync("./template.hbs", "utf8"),
-        helper: "./replace.js",
-        files: "../after-effects-scripts/scripts/*.jsx"})
-    .then(output => fs.writeFileSync("../after-effects-scripts/README.md", output));
+function getFolders(folder, folders) {
+    fs.readdirSync(folder).forEach(item => {
+        const fullPath = path.join(folder, item);
+        if (path.extname(fullPath) === ".md") {
+            folders.push(folder);
+        }
+        if (fs.statSync(fullPath).isDirectory() === true) {
+            getFolders(fullPath, folders);
+        }
+    });
+    return folders;
+}
+
+gulp.task("default", done => {
+    getFolders("../after-effects-scripts", []).forEach(folder => {
+        jsdoc2md.render({
+            template: fs.readFileSync("./template.hbs", "utf8"),
+            helper: "./replace.js",
+            files: `${folder}/scripts/*.jsx`})
+        .then(output => fs.writeFileSync(`${folder}/README.md`, output));
+    });
     return done();
-})
-
-gulp.task("default", gulp.series("docs"));
+});
