@@ -8,7 +8,7 @@ const jsdoc2md = require("jsdoc-to-markdown");
 function getFolders(folder, folders) {
     fs.readdirSync(folder).forEach(item => {
         const fullPath = path.join(folder, item);
-        if (path.extname(fullPath) === ".md") {
+        if (path.basename(fullPath) === "scripts") {
             folders.push(folder);
         }
         if (fs.statSync(fullPath).isDirectory() === true) {
