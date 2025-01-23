@@ -3,6 +3,7 @@
 const gulp = require("gulp");
 const fs = require("fs");
 const path = require("path");
+const eslint = require("gulp-eslint");
 const jsdoc2md = require("jsdoc-to-markdown");
 
 function getFolders(folder, folders) {
@@ -18,7 +19,7 @@ function getFolders(folder, folders) {
     return folders;
 }
 
-gulp.task("default", done => {
+gulp.task("build", done => {
     getFolders("../after-effects-scripts", []).forEach(folder => {
         jsdoc2md.render({
             template: fs.readFileSync("./template.hbs", "utf8"),
@@ -28,3 +29,12 @@ gulp.task("default", done => {
     });
     return done();
 });
+
+gulp.task("lint", () => {
+    return gulp.src(["../after-effects-scripts/*/*.jsx"])
+        .pipe(eslint({configFile: ".eslintrc"}))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError())
+});
+
+gulp.task("default", gulp.series("lint", "build"));

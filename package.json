@@ -1,6 +1,8 @@
 {
-  "dependencies": {
-    "gulp": "^4.0.2",
-    "jsdoc-to-markdown": "^8.0.0"
+  "devDependencies": {
+    "eslint": "^9.18.0",
+    "gulp": "^5.0.0",
+    "gulp-eslint": "^6.0.0",
+    "jsdoc-to-markdown": "^9.1.1"
   }
 }
