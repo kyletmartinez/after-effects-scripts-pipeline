@@ -32,7 +32,7 @@ gulp.task("build", done => {
 
 gulp.task("lint", () => {
     return gulp.src(["../after-effects-scripts/*/*.jsx"])
-        .pipe(eslint({configFile: ".eslintrc"}))
+        .pipe(eslint({configFile: "eslint.config.js"}))
         .pipe(eslint.format())
         .pipe(eslint.failAfterError())
 });
