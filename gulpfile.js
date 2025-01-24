@@ -31,8 +31,8 @@ gulp.task("build", done => {
 });
 
 gulp.task("lint", () => {
-    return gulp.src(["../after-effects-scripts/*/*.jsx"])
-        .pipe(eslint({configFile: "eslint.config.js"}))
+    return gulp.src(["../after-effects-scripts/**/*.jsx"])
+        .pipe(eslint({configFile: ".eslintrc.json"}))
         .pipe(eslint.format())
         .pipe(eslint.failAfterError())
 });
