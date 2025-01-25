@@ -1,5 +1,9 @@
 {
-    "extends": "eslint:all",
+    "parserOptions": {
+        "ecmaVersion": 3,
+        "sourceType": "script",
+        "allowReserved": false
+    },
     "globals": {
         "alert": "readonly",
         "app": "readonly",
