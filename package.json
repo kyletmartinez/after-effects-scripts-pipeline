@@ -2,6 +2,8 @@
   "devDependencies": {
     "gulp": "^5.0.0",
     "gulp-eslint": "^6.0.0",
-    "jsdoc-to-markdown": "^9.1.1"
+    "gulp-git": "^2.11.0",
+    "jsdoc-to-markdown": "^9.1.1",
+    "through2": "^4.0.2"
   }
 }
