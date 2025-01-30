@@ -35,20 +35,22 @@ gulp.task("build", done => {
 });
 
 gulp.task("version", () => {
-    return git.exec({args: "diff --name-only", log: false, cwd: baseDir}, (err, stdout) => {
+    return git.exec({args: "diff --name-only", log: true, cwd: baseDir}, (err, stdout) => {
         const files = stdout.trim().split("\n").map(file => `${baseDir}/**/${file}`);
         return gulp.src(files)
             .pipe(through2.obj((file, enc, cb) => {
-                let content = file.contents.toString(enc);
-                const versionString = content.match(/@version\s\d\.\d/g)[0];
-                const oldVersion = parseFloat(versionString.split(" ")[1]);
-                const newVersion = String(oldVersion + 0.1);
-                content = content.replace(/@version\s\d\.\d/g, `@version ${newVersion}`);
-                file.contents = Buffer.from(content);
+                if (file.contents !== null) {
+                    let content = file.contents.toString(enc);
+                    const versionString = content.match(/@version\s\d\.\d/g)[0];
+                    const oldVersion = parseFloat(versionString.split(" ")[1]);
+                    const newVersion = String(oldVersion + 0.1);
+                    content = content.replace(/@version\s\d\.\d/g, `@version ${newVersion}`);
+                    file.contents = Buffer.from(content);
+                }
                 cb(null, file);
             }))
             .pipe(gulp.dest(baseDir));
-        });
+    });
 });
 
 gulp.task("lint", () => {
