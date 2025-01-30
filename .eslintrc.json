@@ -27,12 +27,13 @@
         "writeLn": "readonly"
     },
     "rules": {
-        "array-bracket-spacing": ["error", "never"],
         "array-bracket-newline": ["error", {
             "multiline": true
         }],
+        "array-bracket-spacing": ["error", "never"],
         "array-element-newline": ["error", "consistent"],
-        "brace-style": ["error", "1tbs", { 
+        "block-spacing": ["error", "never"],
+        "brace-style": ["error", "1tbs", {
             "allowSingleLine": true
         }],
         "comma-dangle": ["error", "never"],
@@ -46,8 +47,9 @@
         "eol-last": ["error", "never"],
         "eqeqeq": ["error"],
         "func-call-spacing": ["error", "never"],
+        "function-call-argument-newline": ["error", "never"],
         "function-paren-newline": ["error", "never"],
-        "indent": ["error", 4,  {
+        "indent": ["error", 4, {
             "SwitchCase": 1
         }],
         "key-spacing": ["error", {
@@ -58,8 +60,18 @@
             "before": true,
             "after": true
         }],
+        "line-comment-position": ["error", "above"],
         "max-len": ["error", {
             "code": 100
+        }],
+        "max-statements-per-line": ["error", {
+            "max": 1
+        }],
+        "multiline-comment-style": ["error", "starred-block"],
+        "multiline-ternary": ["error", "never"],
+        "new-parens": ["error", "always"],
+        "newline-per-chained-call": ["error", {
+            "ignoreChainWithDepth": 2
         }],
         "no-bitwise": ["error"],
         "no-eval": ["error"],
@@ -78,7 +90,6 @@
         "no-unneeded-ternary": ["error"],
         "no-unused-vars": ["error"],
         "no-whitespace-before-property": ["error"],
-        "object-curly-newline": ["error"],
         "object-curly-newline": ["error", {
             "ObjectExpression": {
                 "multiline": true,
@@ -88,6 +99,9 @@
             "ImportDeclaration": "never",
             "ExportDeclaration": "never"
         }],
+        "object-curly-spacing": ["error", "never"],
+        "object-property-newline": ["error"],
+        "operator-linebreak": ["error", "after"],
         "quote-props": ["error", "always"],
         "quotes": ["error", "double"],
         "radix": ["error", "always"],
@@ -100,11 +114,12 @@
             "words": true,
             "nonwords": false
         }],
+        "spaced-comment": ["error", "always"],
         "switch-colon-spacing": ["error", {
             "before": false,
             "after": true
         }],
-        "wrap-regex": ["error"],
-        "wrap-iife": ["error", "inside"]
+        "wrap-iife": ["error", "inside"],
+        "wrap-regex": ["error"]
     }
 }
