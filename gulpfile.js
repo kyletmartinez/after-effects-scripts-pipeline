@@ -35,7 +35,8 @@ gulp.task("build", done => {
 });
 
 gulp.task("version", () => {
-    return git.exec({args: "diff --name-only", log: true, cwd: baseDir}, (err, stdout) => {
+    const options = {args: "diff --name-only", cwd: baseDir, log: true, quiet: true};
+    return git.exec(options, (err, stdout) => {
         const files = stdout.trim().split("\n").map(file => `${baseDir}/**/${file}`);
         if (files && files.length === 0) return;
         return gulp.src(files)
