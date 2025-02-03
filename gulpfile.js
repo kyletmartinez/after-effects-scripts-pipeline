@@ -42,9 +42,10 @@ gulp.task("version", () => {
             .pipe(through2.obj((file, enc, cb) => {
                 if (file.contents !== null) {
                     let content = file.contents.toString(enc);
-                    const versionString = content.match(/@version\s\d\.\d/g)[0];
-                    const oldVersion = parseFloat(versionString.split(" ")[1]);
-                    const newVersion = String(oldVersion + 0.1);
+                    const oldVersion = content.match(/@version\s\d\.\d/g)[0];
+                    const oldFloat = parseFloat(oldVersion.split(" ")[1]);
+                    const NewFloat = oldFloat + 0.1;
+                    const newVersion = NewFloat.toFixed(1);
                     content = content.replace(/@version\s\d\.\d/g, `@version ${newVersion}`);
                     file.contents = Buffer.from(content);
                 }
