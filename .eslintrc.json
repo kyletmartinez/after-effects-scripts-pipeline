@@ -44,7 +44,7 @@
         "comma-style": ["error", "last"],
         "computed-property-spacing": ["error", "never"],
         "dot-notation": ["error"],
-        "eol-last": ["error", "never"],
+        "eol-last": ["error", "always"],
         "eqeqeq": ["error"],
         "func-call-spacing": ["error", "never"],
         "function-call-argument-newline": ["error", "never"],
