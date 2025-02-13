@@ -23,17 +23,6 @@ function getFolders(folder, folders) {
     return folders;
 }
 
-gulp.task("build", done => {
-    getFolders(baseDir, []).forEach(folder => {
-        jsdoc2md.render({
-            template: fs.readFileSync("./template.hbs", "utf8"),
-            helper: "./replace.js",
-            files: `${folder}/scripts/*.jsx`})
-        .then(output => fs.writeFileSync(`${folder}/README.md`, output));
-    });
-    return done();
-});
-
 gulp.task("version", () => {
     const options = {args: "diff --name-only", cwd: baseDir, log: true, quiet: true};
     return git.exec(options, (err, stdout) => {
@@ -56,6 +45,17 @@ gulp.task("version", () => {
     });
 });
 
+gulp.task("build", done => {
+    getFolders(baseDir, []).forEach(folder => {
+        jsdoc2md.render({
+            template: fs.readFileSync("./template.hbs", "utf8"),
+            helper: "./replace.js",
+            files: `${folder}/scripts/*.jsx`})
+        .then(output => fs.writeFileSync(`${folder}/README.md`, output));
+    });
+    return done();
+});
+
 gulp.task("lint", () => {
     return gulp.src([`${baseDir}/**/*/*.jsx`])
         .pipe(eslint({configFile: ".eslintrc.json"}))
@@ -63,4 +63,4 @@ gulp.task("lint", () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task("default", gulp.series("lint", "version", "build"));
+gulp.task("default", gulp.series("lint", "build"));
